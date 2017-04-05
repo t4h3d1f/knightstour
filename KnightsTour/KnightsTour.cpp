@@ -8,7 +8,7 @@ using namespace std;
 
 const int boardSize = 9;
 int board[boardSize][boardSize] = { 0 };
-long failedAttempts = 0;
+long long failedAttempts = 0;
 
 void drawBoard()
 {
@@ -33,7 +33,7 @@ bool moveKnight(int row, int col, int moveNum)
 		board[row][col] = moveNum;
 		return true;
 	}
-	if (failedAttempts % 100000 == 0)
+	if (failedAttempts % 10000000 == 0)
 	{
 	drawBoard();
 	cout << endl;
@@ -71,7 +71,11 @@ bool moveKnight(int row, int col, int moveNum)
 	return true;
 }
 
-
+////
+//use increments of pi/8
+//round(sqrt(5)cos(theta)) for col
+//round(sqrt(5)sin(theta)) for row
+////
 
 int main()
 {

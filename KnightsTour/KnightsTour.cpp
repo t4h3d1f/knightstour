@@ -6,12 +6,25 @@
 
 using namespace std;
 
-const int boardSize = 5;
+const int boardSize = 9;
 int board[boardSize][boardSize] = { 0 };
+long failedAttempts = 0;
+
+void drawBoard()
+{
+	for (int i = 0; i < boardSize; i++)
+	{
+		for (int j = 0; j < boardSize; j++)
+		{
+			cout << board[i][j] << '\t';
+		}
+		cout << endl;
+	}
+}
 
 bool moveKnight(int row, int col, int moveNum)
 {
-	if (!((0 <= row <= boardSize) && (0 <= col <= boardSize)))
+	if (!((0 <= row) && (row <= boardSize-1) && (0 <= col)&&(col <= boardSize-1)))
 		return false;
 	if (!(board[row][col] == 0))
 		return false;
@@ -20,13 +33,19 @@ bool moveKnight(int row, int col, int moveNum)
 		board[row][col] = moveNum;
 		return true;
 	}
+	if (failedAttempts % 100000 == 0)
+	{
+	drawBoard();
+	cout << endl;
+	}
+	board[row][col] = moveNum;
 	if (!moveKnight(row - 2, col + 1, moveNum + 1))
 	{
 		if (!moveKnight(row - 1, col + 2, moveNum + 1))
 		{
 			if (!moveKnight(row + 1, col + 2, moveNum + 1))
 			{
-				if (!moveKnight(row + 2, col + 2, moveNum + 1))
+				if (!moveKnight(row + 2, col + 1, moveNum + 1))
 				{
 					if (!moveKnight(row +2, col -1, moveNum + 1))
 					{
@@ -36,6 +55,10 @@ bool moveKnight(int row, int col, int moveNum)
 							{
 								if (!moveKnight(row - 2, col -1, moveNum + 1))
 								{
+									//drawBoard();
+									//cout << endl;
+									board[row][col] = 0;
+									failedAttempts++;
 									return false;
 								}
 							}
@@ -45,25 +68,17 @@ bool moveKnight(int row, int col, int moveNum)
 			}
 		}
 	}
-	board[row][col] = moveNum;
 	return true;
 }
 
-void drawBoard()
-{
-	for (int i = 0; i < boardSize; i++)
-	{
-		for (int j = 0; j < boardSize; j++)
-		{
-			cout << board[i][j];
-		}
-		cout << endl;
-	}
-}
+
 
 int main()
 {
 	moveKnight(0, 0, 1);
-	cin;
-	cin;
+	cout << "Solution found!\n";
+	drawBoard();
+	cout << "There were " << failedAttempts << " failed attempts to find a solution.\n";
+	cin.get();
+//	cin.get();
 }

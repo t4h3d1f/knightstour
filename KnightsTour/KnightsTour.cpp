@@ -2,11 +2,12 @@
 //
 
 #include "stdafx.h"
-#include<iostream>
+#include <iostream>
+
 
 using namespace std;
 
-const int boardSize = 9;
+const int boardSize = 8;
 int board[boardSize][boardSize] = { 0 };
 long long failedAttempts = 0;
 
@@ -21,7 +22,9 @@ void drawBoard()
 		cout << endl;
 	}
 }
-
+//moveKnight checks if the knight is on the board, and if the space is has been used in the current attempt.
+//if the prior checks clear, check if the board has been filled.
+//if the board has not been filled
 bool moveKnight(int row, int col, int moveNum)
 {
 	if (!((0 <= row) && (row <= boardSize-1) && (0 <= col)&&(col <= boardSize-1)))
@@ -36,7 +39,9 @@ bool moveKnight(int row, int col, int moveNum)
 	if (failedAttempts % 10000000 == 0)
 	{
 	drawBoard();
-	cout << endl;
+	failedAttempts++; //add one for every ten million failed attempt, since the program 
+					//only evaluates a failed attempt once it has run out of moves. 
+	cout << endl; //this would cause the board to be printed multiple times otherwise
 	}
 	board[row][col] = moveNum;
 	if (!moveKnight(row - 2, col + 1, moveNum + 1))
@@ -55,8 +60,6 @@ bool moveKnight(int row, int col, int moveNum)
 							{
 								if (!moveKnight(row - 2, col -1, moveNum + 1))
 								{
-									//drawBoard();
-									//cout << endl;
 									board[row][col] = 0;
 									failedAttempts++;
 									return false;
@@ -71,18 +74,16 @@ bool moveKnight(int row, int col, int moveNum)
 	return true;
 }
 
-////
-//use increments of pi/8
-//round(sqrt(5)cos(theta)) for col
-//round(sqrt(5)sin(theta)) for row
-////
+
 
 int main()
 {
-	moveKnight(0, 0, 1);
+	cout << "enter starting location\n";
+	int row, col;
+	cin >> row >> col;
+	moveKnight(row, col, 1);
 	cout << "Solution found!\n";
 	drawBoard();
 	cout << "There were " << failedAttempts << " failed attempts to find a solution.\n";
-	cin.get();
-//	cin.get();
+	system("pause");
 }

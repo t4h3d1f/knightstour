@@ -1,3 +1,5 @@
 ﻿  KnightsTour.cpp
-  KnightsTour.vcxproj -> C:\Users\Thoomas\documents\visual studio 2017\Projects\KnightsTour\Debug\KnightsTour.exe
-  KnightsTour.vcxproj -> C:\Users\Thoomas\documents\visual studio 2017\Projects\KnightsTour\Debug\KnightsTour.pdb (Partial PDB)
+c:\users\tgallen\documents\visual studio 2015\projects\knightstour\knightstour\knightstour.cpp(11): warning C4305: 'initializing' : truncation from 'double' to 'const float'
+c:\users\tgallen\documents\visual studio 2015\projects\knightstour\knightstour\knightstour.cpp(74): warning C4552: '-' : operator has no effect; expected operator with side-effect
+c:\users\tgallen\documents\visual studio 2015\projects\knightstour\knightstour\knightstour.cpp(76): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+  KnightsTour.vcxproj -> C:\Users\tgallen\Documents\Visual Studio 2015\Projects\knightstour\Debug\KnightsTour.exe
